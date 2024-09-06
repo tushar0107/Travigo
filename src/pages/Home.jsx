@@ -11,13 +11,13 @@ export const Home = ({navigation})=>{
 				<TextInput style={styles.textInput} placeholder="Where're you looking for?"></TextInput>
 				<View style={styles.menuList}>
 					<View style={styles.menuItem}>
-						<Pressable style={styles.menuListBtn}>
+						<Pressable style={styles.menuListBtn} onPress={()=>{navigation.navigate('Filtering',{nextPage:'Hotel'})}}>
 							<Image source={require('../assets/hotel.png')} style={styles.menuListImg}/>
 							<Text style={styles.menuItemName}>Hotel</Text>
 						</Pressable>
 					</View>
 					<View style={styles.menuItem}>
-						<Pressable style={styles.menuListBtn} onPress={()=>{navigation.navigate('Tours')}}>
+						<Pressable style={styles.menuListBtn} onPress={()=>{navigation.navigate('Filtering',{nextPage:'Tours'})}}>
 							<Image source={require('../assets/tour.png')} style={styles.menuListImg}/>
 							<Text style={styles.menuItemName}>Tour</Text>
 						</Pressable>
@@ -37,13 +37,13 @@ export const Home = ({navigation})=>{
 				</View>
 				<View style={styles.menuList}>
 						<View style={styles.menuItem}>
-							<Pressable style={styles.menuListBtn}>
+							<Pressable style={styles.menuListBtn} onPress={()=>{navigation.navigate('Search',{nextPage:'Trains'})}}>
 								<Image source={require('../assets/train.png')} style={styles.menuListImg}/>
 								<Text style={styles.menuItemName}>Train</Text>
 							</Pressable>
 						</View>
 						<View style={styles.menuItem}>
-							<Pressable style={styles.menuListBtn}>
+							<Pressable style={styles.menuListBtn} onPress={()=>{navigation.navigate('Search',{nextPage:'Buses'})}}>
 								<Image source={require('../assets/bus.png')} style={styles.menuListImg}/>
 								<Text style={styles.menuItemName}>Bus</Text>
 							</Pressable>
@@ -62,7 +62,7 @@ export const Home = ({navigation})=>{
 						</View>
 				</View>
 			</View>
-			<Text style={[styles.headingText,{color:color=='light'?'#eee':'#111'}]}>Promos Today</Text>
+			<Text style={[styles.headingText,]}>Promos Today</Text>
 			<ScrollView style={styles.promos} horizontal>
 				<ImageBackground source={require('../assets/promo-1.jpg')} style={styles.promoImg}>
 					<View style={styles.details}>

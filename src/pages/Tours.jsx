@@ -1,10 +1,12 @@
 import { Button, Image, ImageBackground, Pressable, ScrollView, StyleSheet, Text, useWindowDimensions, View } from "react-native";
+import { Header } from "../components/Header";
 
 
 
-export const Tours = ()=>{
-
+export const Tours = ({navigation})=>{
 	return(
+		<>
+		<Header navigation={navigation} title={'Tours'}/>
 		<ScrollView styles={styles.toursContainer}>
 			<View style={styles.tourContent}>
 				<ImageBackground source={require('../assets/tour-andaman.jpg')} style={{width:useWindowDimensions,height:200}}>
@@ -23,7 +25,7 @@ export const Tours = ()=>{
 			</View>
 			<View style={styles.tourContent}>
 				<ImageBackground source={require('../assets/tour-venice.webp')} style={{width:useWindowDimensions,height:200}}>
-					<Pressable style={styles.tourPrice}><Text style={styles.tourPriceText}>$699</Text></Pressable>
+					<Pressable style={styles.tourPrice}><Text style={styles.tourPriceText}>$859</Text></Pressable>
 				</ImageBackground>
 				<View style={styles.tourDetails}>
 					<View>
@@ -38,20 +40,21 @@ export const Tours = ()=>{
 			</View>
 			<View style={styles.tourContent}>
 				<ImageBackground source={require('../assets/tour-andaman.jpg')} style={{width:useWindowDimensions,height:200}}>
-					<Pressable style={styles.tourPrice}><Text style={styles.tourPriceText}>$699</Text></Pressable>
+					<Pressable style={styles.tourPrice}><Text style={styles.tourPriceText}>$549</Text></Pressable>
 				</ImageBackground>
 				<View style={styles.tourDetails}>
 					<View>
 						<Text style={styles.tourDetailsTitle}>Tour in Italy, Venice</Text>
 						<Text style={styles.tourDetailsSubTitle}>by Steve Garett</Text>
 					</View>
-					<Pressable style={styles.tourDetailsBook} android_ripple={{color:'eee',radius:80,foreground:false}}><Text style={styles.tourDetailsBookText}>Book Now</Text></Pressable>
+					<Pressable style={styles.tourDetailsBook} android_ripple={{borderless:false}}><Text style={styles.tourDetailsBookText}>Book Now</Text></Pressable>
 				</View>
 				<View style={styles.tourReview}>
 					<Text>Ratings 105</Text>
 				</View>
 			</View>
 		</ScrollView>
+		</>
 	);
 }
 
@@ -70,7 +73,7 @@ const styles = StyleSheet.create({
 		borderRadius: 8
 	},
 	tourContent:{
-		marginTop:20
+		marginVertical:20
 	},
 	tourDetails:{
 		padding: 20,
