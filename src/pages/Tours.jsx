@@ -20,7 +20,7 @@ export const Tours = ({navigation})=>{
 					<Pressable style={styles.tourDetailsBook} android_ripple={{color:'eee',radius:80,foreground:false}}><Text style={styles.tourDetailsBookText}>Book Now</Text></Pressable>
 				</View>
 				<View style={styles.tourReview}>
-					<Text>Ratings 105</Text>
+					<Text style={{color:'#111'}}>Ratings 105</Text>
 				</View>
 			</View>
 			<View style={styles.tourContent}>
@@ -35,7 +35,7 @@ export const Tours = ({navigation})=>{
 					<Pressable style={styles.tourDetailsBook} android_ripple={{color:'eee',radius:80,foreground:false}}><Text style={styles.tourDetailsBookText}>Book Now</Text></Pressable>
 				</View>
 				<View style={styles.tourReview}>
-					<Text>Ratings 105</Text>
+					<Text style={{color:'#111'}}>Ratings 105</Text>
 				</View>
 			</View>
 			<View style={styles.tourContent}>
@@ -50,7 +50,7 @@ export const Tours = ({navigation})=>{
 					<Pressable style={styles.tourDetailsBook} android_ripple={{borderless:false}}><Text style={styles.tourDetailsBookText}>Book Now</Text></Pressable>
 				</View>
 				<View style={styles.tourReview}>
-					<Text>Ratings 105</Text>
+					<Text style={{color:'#111'}}>Ratings 105</Text>
 				</View>
 			</View>
 		</ScrollView>

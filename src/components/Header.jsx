@@ -1,8 +1,9 @@
+import { useNavigation } from "@react-navigation/native";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 
 
-export const Header = ({navigation,title,nextPage})=>{
-	
+export const Header = ({title,nextPage})=>{
+	const navigation = useNavigation();
 
 	return(
 		<View style={styles.header}>
@@ -11,13 +12,10 @@ export const Header = ({navigation,title,nextPage})=>{
           	</Pressable>
 			<Text style={styles.logo}>{title}</Text>
 			{
-				nextPage? 
-				<Pressable onPress={()=>{navigation.navigate(nextPage)}}>
-					<Text style={styles.applyBtn}>Apply</Text>
-				</Pressable> :
-				<Pressable android_ripple={{color:'#eee',borderless:true}} style={{width:50,height:50}}>
+				nextPage ==='search'?
+				<Pressable android_ripple={{color:'#eee',borderless:true}} onPress={()=>{navigation.navigate('Filtering',{nextPage:'Hotel'})}} style={{width:50,height:50}}>
 			  		<Image source={require('../assets/search.png')} style={{width:30,margin:'auto',objectFit:'contain'}}/>
-				</Pressable>
+				</Pressable>: <Text></Text>
 			}
 		</View>
 	);

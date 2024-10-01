@@ -8,10 +8,10 @@ export const Home = ({navigation})=>{
 		<ScrollView style={styles.container}>
 			<Image source={require('../assets/hero.jpg')} style={styles.heroimg}/>
 			<View style={styles.mainMenu}>
-				<TextInput style={styles.textInput} placeholder="Where're you looking for?"></TextInput>
+				<TextInput style={styles.textInput} placeholder="Where're you looking for?" placeholderTextColor={'grey'}></TextInput>
 				<View style={styles.menuList}>
 					<View style={styles.menuItem}>
-						<Pressable style={styles.menuListBtn} onPress={()=>{navigation.navigate('Filtering',{nextPage:'Hotel'})}}>
+						<Pressable style={styles.menuListBtn} onPress={()=>{navigation.navigate('Hotel',{nextPage:'Hotel'})}}>
 							<Image source={require('../assets/hotel.png')} style={styles.menuListImg}/>
 							<Text style={styles.menuItemName}>Hotel</Text>
 						</Pressable>
@@ -116,7 +116,8 @@ const styles = StyleSheet.create({
 		borderRadius: 10,
 		paddingHorizontal: 20,
 		borderColor: 'grey',
-		borderWidth: 2
+		borderWidth: 2,
+		color:'black'
 	},
 	menuList:{
 		flexDirection:'row',

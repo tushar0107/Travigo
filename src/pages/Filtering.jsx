@@ -5,9 +5,8 @@ import CheckBox from "@react-native-community/checkbox";
 
 
 export const Filtering =({route,navigation})=>{
-	const {nextPage} = route.params;
 	const [isChecked,setIsChecked] = useState(false);
-	const handleCheck = (e)=>{
+	const handleCheck = (e,id)=>{
 		isChecked?setIsChecked(false):setIsChecked(true);
 	}
 	const [adultQuantity,setAdultQuantity] = useState(0);
@@ -30,11 +29,12 @@ export const Filtering =({route,navigation})=>{
 
 	return(
 		<>
-		<Header navigation={navigation} title={'Filtering'} nextPage={nextPage}/>
+		<Header navigation={navigation} title={'Filter'} nextPage={false}/>
 		<ScrollView style={styles.filterContainer}>
 			<View style={styles.facilitiesContainer}>
+				<TextInput style={styles.textInput} placeholder="Hotel name, City, location" placeholderTextColor={'grey'}></TextInput>
 				<Text style={styles.containerTextHeading}>Facilities</Text>
-				<ScrollView style={styles.facilities} horizontal>
+				<ScrollView style={styles.facilities} horizontal>					
 					<Pressable style={styles.filterButton} id="checkbox-1">
 						<CheckBox disabled={false} tintColors={{true:"#ff5757",false:"#ff5757"}} value={isChecked} onValueChange={(e)=>handleCheck(e)}/>
 						<Text style={styles.filterButtonText}>WiFi</Text>
@@ -59,7 +59,7 @@ export const Filtering =({route,navigation})=>{
 				<View style={styles.guestSelector}>
 					<View>
 						<Text style={styles.textSubtitle}>Adults</Text>
-						<Text>16+ years</Text>
+						<Text style={{color:'#111'}}>16+ years</Text>
 					</View>
 					<View style={styles.guestModify}>
 						<Pressable onPress={()=>modifyQuantity('adult',-1)}><Image source={require('../assets/minus.png')} style={styles.modifyBtn}/></Pressable>
@@ -70,7 +70,7 @@ export const Filtering =({route,navigation})=>{
 				<View style={styles.guestSelector}>
 				<View>
 					<Text style={styles.textSubtitle}>Children</Text>
-					<Text>2-12 years</Text>
+					<Text style={{color:'#111'}}>2-12 years</Text>
 					</View>
 					<View style={styles.guestModify}>
 						<Pressable onPress={()=>modifyQuantity('child',-1)}><Image source={require('../assets/minus.png')} style={styles.modifyBtn}/></Pressable>
@@ -102,7 +102,7 @@ export const Filtering =({route,navigation})=>{
 				</ScrollView>
 			</View>
 
-			<Pressable onPress={()=>{navigation.navigate(nextPage)}} style={{padding:10,backgroundColor:'#ff5757'}} android_ripple={{borderless:false}}><Text style={{color:'#fff',fontSize:18,textAlign:'center'}}>Apply filters</Text></Pressable>
+			<Pressable onPress={()=>{navigation.navigate(false)}} style={{padding:10,backgroundColor:'#ff5757'}} android_ripple={{borderless:false}}><Text style={{color:'#fff',fontSize:18,textAlign:'center'}}>Apply filters</Text></Pressable>
 
 		</ScrollView>
 		</>
@@ -110,6 +110,15 @@ export const Filtering =({route,navigation})=>{
 }
 
 const styles = StyleSheet.create({
+	textInput:{
+		borderRadius: 10,
+		paddingHorizontal: 20,
+		borderColor: 'grey',
+		borderWidth: 2,
+		color:'black',
+		marginBottom:20,
+		fontSize:16
+	},
 	filterContainer:{
 		padding:10,
 	},
@@ -117,11 +126,13 @@ const styles = StyleSheet.create({
 		marginVertical:30
 	},
 	containerTextHeading:{
+		color:'#111',
 		fontSize: 24,
 		fontWeight:'bold',
 		marginBottom:10
 	},
 	textSubtitle:{
+		color:'#111',
 		fontSize: 20	
 	},
 	facilities:{
@@ -161,6 +172,7 @@ const styles = StyleSheet.create({
 		padding:10
 	},
 	quantity:{
+		color:'#111',
 		fontSize:24,
 		width:30,
 		textAlign:'center'

@@ -19,6 +19,8 @@ import { Hotel } from './src/pages/Hotel';
 import { Train } from './src/pages/Train';
 import { Search } from './src/components/Search';
 import { Bus } from './src/pages/Bus';
+import { ConfirmHotel } from './src/pages/ConfirmHotel';
+import { HotelPage } from './src/pages/HotelPage';
 
 const Stack = createNativeStackNavigator();
 
@@ -50,6 +52,8 @@ function App(): React.JSX.Element {
         <Stack.Screen name='Hotel' options={{headerShown:false}} component={Hotel}/>
         <Stack.Screen name='Trains' options={{headerShown:false}} component={Train}/>
         <Stack.Screen name='Buses' options={{headerShown:false}} component={Bus}/>
+        <Stack.Screen name='ConfirmHotel' options={{headerShown:false}} component={ConfirmHotel}/>
+        <Stack.Screen name='HotelPage' options={{headerShown:false}} component={HotelPage}/>
       </Stack.Group>
       <Stack.Group screenOptions={{presentation:'modal'}}>
         <Stack.Screen name='Filtering' options={{headerShown:false}} component={Filtering}/>
