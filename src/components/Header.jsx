@@ -2,7 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 
 
-export const Header = ({title,nextPage})=>{
+export const Header = ({title,search})=>{
 	const navigation = useNavigation();
 
 	return(
@@ -12,7 +12,7 @@ export const Header = ({title,nextPage})=>{
           	</Pressable>
 			<Text style={styles.logo}>{title}</Text>
 			{
-				nextPage ==='search'?
+				search ===true?
 				<Pressable android_ripple={{color:'#eee',borderless:true}} onPress={()=>{navigation.navigate('Filtering',{nextPage:'Hotel'})}} style={{width:50,height:50}}>
 			  		<Image source={require('../assets/search.png')} style={{width:30,margin:'auto',objectFit:'contain'}}/>
 				</Pressable>: <Text></Text>

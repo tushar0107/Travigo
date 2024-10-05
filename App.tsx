@@ -21,6 +21,10 @@ import { Search } from './src/components/Search';
 import { Bus } from './src/pages/Bus';
 import { ConfirmHotel } from './src/pages/ConfirmHotel';
 import { HotelPage } from './src/pages/HotelPage';
+import { ApiProvider } from '@reduxjs/toolkit/query/react';
+import { store } from './src/store/store';
+import { Provider } from 'react-redux';
+import { Cars } from './src/pages/Cars';
 
 const Stack = createNativeStackNavigator();
 
@@ -43,12 +47,15 @@ const BackButton:Object = (title:String)=>{
 function App(): React.JSX.Element {
 
   return (
+    <Provider store={store}>
+      
     <NavigationContainer>
     <StatusBar barStyle="default" translucent={false} />
     <Stack.Navigator initialRouteName='Home' screenOptions={{}}>
       <Stack.Group>
         <Stack.Screen name='Home' options={{headerShown:false}} component={Home}/>
         <Stack.Screen name='Tours' options={{headerShown:false}} component={Tours}/>
+        <Stack.Screen name='Cars' options={{headerShown:false}} component={Cars}/>
         <Stack.Screen name='Hotel' options={{headerShown:false}} component={Hotel}/>
         <Stack.Screen name='Trains' options={{headerShown:false}} component={Train}/>
         <Stack.Screen name='Buses' options={{headerShown:false}} component={Bus}/>
@@ -61,6 +68,7 @@ function App(): React.JSX.Element {
       </Stack.Group>
     </Stack.Navigator>
     </NavigationContainer>
+    </Provider>
   );
 }
 

@@ -3,9 +3,9 @@ import { useState } from 'react';
 const { StyleSheet, View, Text, Pressable, Image } = require('react-native');
 
 
-export const IncCounter = ({guests,getCount})=>{
-	const [adultQuantity,setAdultQuantity] = useState(guests.adults);
-	const [childQuantity,setChildQuantity] = useState(guests.children);
+export const IncCounter = ({guests,getCount,hideHead})=>{
+	const [adultQuantity,setAdultQuantity] = useState(guests?.adults|| 0);
+	const [childQuantity,setChildQuantity] = useState(guests?.children || 0);
 	const modifyQuantity = (type,q)=>{
 		if(type==='adult'){
 			if(q === -1 && adultQuantity>0){
@@ -23,10 +23,10 @@ export const IncCounter = ({guests,getCount})=>{
 		getCount({adults:adultQuantity,children:childQuantity});
 	}
 	return(
-		<View style={styles.guestContainer}>
-				<Text style={styles.containerTextHeading}>Guests</Text>
+			<View style={styles.guestContainer}>
+				{hideHead?null:<Text style={styles.containerTextHeading}>Guests</Text> }
 				<View style={styles.guestSelector}>
-					<View>
+					<View style={{width:200}}>
 						<Text style={styles.textSubtitle}>Adults</Text>
 						<Text style={{color:'#111'}}>16+ years</Text>
 					</View>
@@ -37,9 +37,9 @@ export const IncCounter = ({guests,getCount})=>{
 					</View>
 				</View>
 				<View style={styles.guestSelector}>
-				<View>
-					<Text style={styles.textSubtitle}>Children</Text>
-					<Text style={{color:'#111'}}>Upto 12 years</Text>
+					<View style={{width:200}}>
+						<Text style={styles.textSubtitle}>Children</Text>
+						<Text style={{color:'#111'}}>Upto 12 years</Text>
 					</View>
 					<View style={styles.guestModify}>
 						<Pressable onPress={()=>modifyQuantity('child',-1)}><Image source={require('../assets/minus.png')} style={styles.modifyBtn}/></Pressable>

@@ -1,4 +1,5 @@
 import { Image, ImageBackground, Pressable, ScrollView, StyleSheet, Text, TextInput, useColorScheme, useWindowDimensions, View } from "react-native";
+import { store } from "../store/store";
 
 
 export const Home = ({navigation})=>{
@@ -11,19 +12,19 @@ export const Home = ({navigation})=>{
 				<TextInput style={styles.textInput} placeholder="Where're you looking for?" placeholderTextColor={'grey'}></TextInput>
 				<View style={styles.menuList}>
 					<View style={styles.menuItem}>
-						<Pressable style={styles.menuListBtn} onPress={()=>{navigation.navigate('Hotel',{nextPage:'Hotel'})}}>
+						<Pressable style={styles.menuListBtn} onPress={()=>{navigation.navigate('Hotel')}}>
 							<Image source={require('../assets/hotel.png')} style={styles.menuListImg}/>
 							<Text style={styles.menuItemName}>Hotel</Text>
 						</Pressable>
 					</View>
 					<View style={styles.menuItem}>
-						<Pressable style={styles.menuListBtn} onPress={()=>{navigation.navigate('Filtering',{nextPage:'Tours'})}}>
+						<Pressable style={styles.menuListBtn} onPress={()=>{navigation.navigate('Tours')}}>
 							<Image source={require('../assets/tour.png')} style={styles.menuListImg}/>
 							<Text style={styles.menuItemName}>Tour</Text>
 						</Pressable>
 					</View>
 					<View style={styles.menuItem}>
-						<Pressable style={styles.menuListBtn}>
+						<Pressable style={styles.menuListBtn} onPress={()=>{navigation.navigate('Cars')}}>
 							<Image source={require('../assets/car.png')} style={styles.menuListImg}/>
 							<Text style={styles.menuItemName}>Car</Text>
 						</Pressable>
@@ -157,31 +158,32 @@ const styles = StyleSheet.create({
 		width: 220,
 		height: 300,
 		marginEnd: 20,
-		padding: 10,
 		borderRadius: 12,
 		justifyContent: 'flex-end'
 	},
-	promoDetails:{
+	details:{
+		padding:10,
 		color:'#fff',
+		backgroundColor:'#11111133',
 	},
 	promoTitle:{
 		marginBottom:10,
-		fontSize: 30,
+		fontSize: 22,
 		fontWeight: 'bold',
 		color:'#fff'
 	},
 	promoSubTitle:{
-		fontSize: 20,
+		fontSize: 16,
 		color:'#fff'
 	},
 	promoBtnText:{
-		width: 110,
+		width: 90,
 		backgroundColor:'#FF5757',
 		color:'#fff',
 		borderRadius:6,
 		paddingTop:6,
 		paddingLeft:8,
 		paddingBottom: 8,
-		fontSize: 20,
+		fontSize: 16,
 	}
 });

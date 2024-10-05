@@ -102,7 +102,7 @@ export const Filtering =({route,navigation})=>{
 				</ScrollView>
 			</View>
 
-			<Pressable onPress={()=>{navigation.navigate(false)}} style={{padding:10,backgroundColor:'#ff5757'}} android_ripple={{borderless:false}}><Text style={{color:'#fff',fontSize:18,textAlign:'center'}}>Apply filters</Text></Pressable>
+			<Pressable onPress={()=>{navigation.navigate('Tours')}} style={{padding:10,backgroundColor:'#ff5757'}} android_ripple={{borderless:false}}><Text style={{color:'#fff',fontSize:18,textAlign:'center'}}>Apply filters</Text></Pressable>
 
 		</ScrollView>
 		</>
