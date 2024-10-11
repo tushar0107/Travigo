@@ -1,10 +1,23 @@
+export const scheme = {
+	//useColorScheme()==='light'?'#f3f3f3':'#1f1f1f';
+	light:'#f3f3f3',
+	dark:'#1f1f1f'
+}
+
+export const User = {
+	name:'Steve Rogers',
+	address: 'Brooklyn, New York',
+	username: '@roger.steve',
+	email: 'steve.rogers@gmail.com'
+
+}
 
 export const hotels = [
 	{
 		id:1,
 		name:'Bellagio Hotel Casino',
 		location:'Las Vegas',
-		price:2150,
+		price:950,
 		package:'5D, 4N',
 		discount:20,
 		phone:'+44 20 7486 5800',
@@ -18,7 +31,7 @@ export const hotels = [
 		id:2,
 		name:'Hyatt Regency',
 		location:'30 Portman Square, London',
-		price:1560,
+		price:760,
 		package:'3D, 2N',
 		phone:'+44 20 7486 5800',
 		rating:4.7,
@@ -31,7 +44,7 @@ export const hotels = [
 		id:3,
 		name:'Bulgari Hotel Milano',
 		location:'Milan, Italy',
-		price:1917,
+		price:680,
 		package:'3D, 3N',
 		discount:15,
 		phone:'+44 20 7486 5800',
@@ -123,4 +136,15 @@ export const cars = [
 		insuarance: true,
 		images:[require('../assets/toyota-urban-cruiser.webp'),]
 	},
+]
+
+
+export const trains = [
+	{
+		name:'Amritsar SF Express',
+		number:22125,
+		from:'',
+		runningDays: ['Sat'],
+		seat:['RAC-2A','WL-']
+	}
 ]

@@ -1,5 +1,4 @@
 import { Image, ImageBackground, Pressable, ScrollView, StyleSheet, Text, TextInput, useColorScheme, useWindowDimensions, View } from "react-native";
-import { store } from "../store/store";
 
 
 export const Home = ({navigation})=>{
@@ -7,7 +6,14 @@ export const Home = ({navigation})=>{
 	const color = useColorScheme();
 	return(
 		<ScrollView style={styles.container}>
-			<Image source={require('../assets/hero.jpg')} style={styles.heroimg}/>
+			<ImageBackground source={require('../assets/hero.jpg')} style={styles.heroimg}>
+				<Pressable style={styles.headerIcon} onPress={()=>navigation.navigate('Home')}>
+					<Image source={require('../assets/bars.png')} style={{width:30,objectFit:'contain',marginHorizontal:'auto'}}/>
+				</Pressable>
+				<Pressable style={styles.headerIcon} onPress={()=>navigation.navigate('Profile')}>
+					<Image source={require('../assets/user-outline.png')} style={{width:30,objectFit:'contain',marginHorizontal:'auto'}}/>
+				</Pressable>
+			</ImageBackground>
 			<View style={styles.mainMenu}>
 				<TextInput style={styles.textInput} placeholder="Where're you looking for?" placeholderTextColor={'grey'}></TextInput>
 				<View style={styles.menuList}>
@@ -17,6 +23,26 @@ export const Home = ({navigation})=>{
 							<Text style={styles.menuItemName}>Hotel</Text>
 						</Pressable>
 					</View>
+					<View style={styles.menuItem}>
+						<Pressable style={styles.menuListBtn} onPress={()=>{navigation.navigate('Trains')}}>
+							<Image source={require('../assets/train.png')} style={styles.menuListImg}/>
+							<Text style={styles.menuItemName}>Train</Text>
+						</Pressable>
+					</View>
+					<View style={styles.menuItem}>
+						<Pressable style={styles.menuListBtn}>
+							<Image source={require('../assets/flight.png')} style={styles.menuListImg}/>
+							<Text style={styles.menuItemName}>Flight</Text>
+						</Pressable>
+					</View>
+					<View style={styles.menuItem}>
+						<Pressable style={styles.menuListBtn} onPress={()=>{navigation.navigate('Buses')}}>
+							<Image source={require('../assets/bus.png')} style={styles.menuListImg}/>
+							<Text style={styles.menuItemName}>Bus</Text>
+						</Pressable>
+					</View>
+				</View>
+				<View style={styles.menuList}>
 					<View style={styles.menuItem}>
 						<Pressable style={styles.menuListBtn} onPress={()=>{navigation.navigate('Tours')}}>
 							<Image source={require('../assets/tour.png')} style={styles.menuListImg}/>
@@ -29,26 +55,6 @@ export const Home = ({navigation})=>{
 							<Text style={styles.menuItemName}>Car</Text>
 						</Pressable>
 					</View>
-					<View style={styles.menuItem}>
-						<Pressable style={styles.menuListBtn}>
-							<Image source={require('../assets/flight.png')} style={styles.menuListImg}/>
-							<Text style={styles.menuItemName}>Flight</Text>
-						</Pressable>
-					</View>
-				</View>
-				<View style={styles.menuList}>
-						<View style={styles.menuItem}>
-							<Pressable style={styles.menuListBtn} onPress={()=>{navigation.navigate('Search',{nextPage:'Trains'})}}>
-								<Image source={require('../assets/train.png')} style={styles.menuListImg}/>
-								<Text style={styles.menuItemName}>Train</Text>
-							</Pressable>
-						</View>
-						<View style={styles.menuItem}>
-							<Pressable style={styles.menuListBtn} onPress={()=>{navigation.navigate('Search',{nextPage:'Buses'})}}>
-								<Image source={require('../assets/bus.png')} style={styles.menuListImg}/>
-								<Text style={styles.menuItemName}>Bus</Text>
-							</Pressable>
-						</View>
 						<View style={styles.menuItem}>
 							<Pressable style={styles.menuListBtn}>
 								<Image source={require('../assets/events.png')} style={styles.menuListImg}/>
@@ -63,7 +69,7 @@ export const Home = ({navigation})=>{
 						</View>
 				</View>
 			</View>
-			<Text style={[styles.headingText,]}>Promos Today</Text>
+			<Text style={styles.headingText}>Promos Today</Text>
 			<ScrollView style={styles.promos} horizontal>
 				<ImageBackground source={require('../assets/promo-1.jpg')} style={styles.promoImg}>
 					<View style={styles.details}>
@@ -104,7 +110,17 @@ const styles = StyleSheet.create({
 	},
 	heroimg:{
 		width: useWindowDimensions,
-		height: 200
+		height: 200,
+		flexDirection:'row',
+		justifyContent:'space-between',
+		paddingVertical:10,
+		paddingHorizontal:15
+	},
+	headerIcon:{
+		width: 40,
+		aspectRatio:1,
+		borderRadius:50,
+		backgroundColor:'#fff',
 	},
 	mainMenu:{
 		marginHorizontal:15,
@@ -144,7 +160,7 @@ const styles = StyleSheet.create({
 	headingText:{
 		margin:20,
 		marginBottom: 0,
-		fontSize: 24,
+		fontSize: 18,
 		fontWeight: 'bold',
 		color: '#000'
 	},

@@ -1,18 +1,26 @@
-import { Image, ImageBackground, Pressable, ScrollView, StyleSheet, Text, useWindowDimensions, View } from "react-native";
+import { Button, Image, ImageBackground, Modal, Pressable, ScrollView, StyleSheet, Text, useWindowDimensions, View } from "react-native";
 import { Header } from "../components/Header";
 import { IncCounter } from "../components/IncCounter";
 import { useEffect, useMemo, useState } from "react";
 import { hotelImages } from "../components/Assets";
 import CheckBox from "@react-native-community/checkbox";
+import DateTimePicker from "react-native-ui-datepicker";
 
 export const HotelPage = ({route,navigation})=>{
 	const {hotel} = route.params;
-	console.log(hotel);
+	
+	const [checkInDate, setCheckInDate] = useState(null);
+	const [checkOutDate, setCheckOutDate] = useState(null);
+	const [openDate, setOpenDate] = useState(false);
 
 	const [adultQuantity,setAdultQuantity] = useState(0);
 	const [childQuantity,setChildQuantity] = useState(0);
 	const [facilities,setfacilities] = useState({});
-	// const [formData,setFormData] = useState({});
+	const getMinDate = ()=>{
+		var d = new Date();
+		d.setDate(d.getDate()-1);
+		return d;
+	}
 
 	const modifyQuantity = (type,q)=>{
 		if(type==='adult'){
@@ -58,22 +66,23 @@ export const HotelPage = ({route,navigation})=>{
 				adults:adultQuantity,
 				children:childQuantity
 			},
+			checkInDate:checkInDate ? new Date(checkInDate).toDateString() : null,
+			checkOutDate:checkOutDate ? new Date(checkOutDate).toDateString() : null,
 			facilities:Object.keys(facilities),
 			price: parseInt(hotel.price),
 		};
 		data.price = (adultQuantity || childQuantity) ?  data.price * (adultQuantity + childQuantity/2) : data.price;
-		console.log('price',data.price)
 		data.price = data.facilities.length > 0 ? data.price + hotel.serviceCharge : data.price;
 
 		return data
-	},[adultQuantity,childQuantity,facilities]);
+	},[adultQuantity,childQuantity,facilities,checkInDate,checkOutDate]);
 
 
 	useEffect(()=>{},[hotel]);
 
 	return(
 		<>
-		<Header title={hotel.name} nextPage={false}/>
+		<Header title={hotel.name}/>
 		<ScrollView style={styles.pageContent}>
 			<ScrollView style={styles.hotelGallery} horizontal>
 				{
@@ -89,14 +98,33 @@ export const HotelPage = ({route,navigation})=>{
 				<Text style={{fontSize:20,color:'#111',marginBottom:20}}>Modify Package</Text>
 				<Text style={{fontSize:20,color:'#111',marginBottom:10}}>Stay Duration</Text>
 				<View style={styles.detailBlock}>
-					<View style={{}}>
+					<Pressable style={{}} onPress={()=>{setOpenDate(!openDate)}}>
 						<Text style={styles.subTitle}>Check-in date</Text>
-						<Text style={styles.title}>05 Dec, 2024</Text>
-					</View>
-					<View><Image source={require('../assets/back-arrow.png')} style={{transform:'rotateZ(180deg)'}}></Image></View>
-					<View style={{}}>
-						<Text style={styles.subTitle}>Check out date</Text>
-						<Text style={styles.title}>15 Dec, 2024</Text>
+						<Text style={styles.title}>{checkInDate ? new Date(checkInDate).toDateString() : 'dd-mm-yyyy'}</Text>
+					</Pressable>
+					<View><Image source={require('../assets/front-arrow.png')}></Image></View>
+					<Pressable style={{}} onPress={()=>{setOpenDate(!openDate)}}>
+						<Text style={styles.subTitle}>Check-out date</Text>
+						<Text style={styles.title}>{checkOutDate ? new Date(checkOutDate).toDateString() : 'dd-mm-yyyy'}</Text>
+					</Pressable>
+					<View style={{display:openDate?'flex':'none',marginTop:30}}>
+							<DateTimePicker mode='range' 
+								minDate={getMinDate()}
+								startDate={checkInDate || null} 
+								endDate={checkOutDate || null}
+								displayFullDays={true}
+								onChange={({startDate,endDate})=>{setCheckInDate(startDate);setCheckOutDate(endDate);}}
+								calendarTextStyle={{color:'#111'}}
+								selectedItemColor='#ff5757'
+								headerContainerStyle={{color:'#111'}}
+								headerTextContainerStyle={{color:'#111'}}
+								headerTextStyle={{color:'#111'}}
+								headerButtonStyle={{color:'#ff5757'}}
+								weekDaysTextStyle={{color:'#ff5757'}}
+							/>
+						<Pressable style={{flexDirection:'row',justifyContent:'flex-end'}} onPress={()=>setOpenDate(!openDate)}>
+							<Text style={{width:70,fontSize:14,fontWeight:'bold',color:'#fff',textAlign:'center',borderRadius:8,backgroundColor:'#ff5757',padding:(20,10)}}>Done</Text>
+						</Pressable>
 					</View>
 				</View>
 				<Text style={styles.subTitle}>Total Guests</Text>
@@ -131,12 +159,10 @@ export const HotelPage = ({route,navigation})=>{
 					{
 						hotel?.facilities.map((index,key)=>{
 							return(
-								<>
 									<View style={{...styles.facility,borderColor:facilities[index]?'#ff5757':'#999',}} key={key}>
 										<Text style={styles.title}>{index}</Text>
 										<CheckBox disabled={false} tintColors={{true:"#ff5757",false:"#999"}} value={facilities[index] || false} onValueChange={(e)=>{handleCheck(e,type=index)}}/>
 									</View>
-								</>
 							);
 						})
 					}

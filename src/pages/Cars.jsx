@@ -7,12 +7,12 @@ export const Cars = ({navigation})=>{
 
 	return(
 		<>
-			<Header title={'Cars'} search={true}/>
+			<Header title={'Cars'} item={'search'}/>
 			<ScrollView>
 			{
 				cars.map((car,key)=>{
 					return(
-						<Pressable style={styles.carsContent} key={key}>
+						<Pressable style={styles.carsContent} key={key} android_ripple={{color:'#eee',radius:300,foreground:false}}>
 							<Image source={car.images[0]} style={styles.carImage}></Image>
 							<View style={styles.carsDetails}>
 								<View>
@@ -24,9 +24,7 @@ export const Cars = ({navigation})=>{
 										<Text style={styles.carFeat}>{car?.seating} Seats</Text>
 									</View>
 								</View>
-								<Pressable style={{}} onPress={()=>{}} android_ripple={{color:'#eee',radius:80,foreground:false}}>
-									<Text style={styles.carsPrice}>${car.price}</Text>
-								</Pressable>
+								<Text style={styles.carsPrice}>${car.price}</Text><Text>per day</Text>
 							</View>
 						</Pressable>
 					);
@@ -42,14 +40,17 @@ const styles = StyleSheet.create({
 		flexDirection:'row',
 		justifyContent:'flex-start',
 		gap: 10,
-		paddingVertical:10
+		paddingVertical:10,
+		marginBottom:10,
+		backgroundColor:'#fff'
 	},
 	carImage:{
 		width:150,
-		height:230,
+		height:200,
 		objectFit: 'cover'
 	},
 	carsDetails:{
+		width:230,
 		paddingVertical:10,
 		justifyContent:'flex-start',
 	},
@@ -65,7 +66,7 @@ const styles = StyleSheet.create({
 		flexDirection:'row',
 		justifyContent:'flex-start',
 		marginTop:10,
-		flexWrap:'wrap',
+		flexWrap:'wrap-reverse',
 		gap:10
 	},
 	carFeat:{

@@ -6,7 +6,7 @@ import { Header } from "../components/Header";
 export const Tours = ({navigation})=>{
 	return(
 		<>
-		<Header navigation={navigation} title={'Tours'} search={true}/>
+		<Header title={'Tours'} item={'search'}/>
 		<ScrollView styles={styles.toursContainer}>
 			<View style={styles.tourContent}>
 				<ImageBackground source={require('../assets/tour-andaman.jpg')} style={{width:useWindowDimensions,height:200}}>
@@ -60,7 +60,6 @@ export const Tours = ({navigation})=>{
 
 const styles = StyleSheet.create({
 	toursContainer:{
-		marginTop:30,
 	},
 	tourPriceText:{
 		width:60,
@@ -73,7 +72,7 @@ const styles = StyleSheet.create({
 		borderRadius: 8
 	},
 	tourContent:{
-		marginVertical:20
+		marginVertical:10
 	},
 	tourDetails:{
 		padding: 20,

@@ -9,34 +9,39 @@ import { addBooking, removeBooking } from "../store/slices/bookingSlice";
 export const ConfirmHotel = ({route,navigation})=>{
 	const {data} = route.params;
 	data.bookingId= 'booking-hotel-'+data.hotel.id;
-	console.log('params:',data);
+	var duration = null
+	if(data.checkInDate && data.checkOutDate){
+		var d1 = new Date(data.checkInDate);
+		var d2 = new Date(data.checkOutDate);
+		var duration = (d2-d1)/(1000*60*60*24);
+	}
 
 	return(
 		<>
-			<Header title={'Confirm Hotel'} nextPage={false}/>
+			<Header title={'Confirm Hotel'}/>
 			<View style={{...styles.confirmContainer,gap:20}}>
 				<View style={{}}>
 					<Text style={styles.subtitle}>Hotel Name</Text>
-					<Text style={styles.title}>{data.hotel.name}, {data.hotel.location}</Text>
+					<Text style={styles.title}>{data.hotel.name}, {'\n'+data.hotel.location}</Text>
 				</View>
 				<View style={{...styles.stayDesc}}>
 					<View>
 						<Text style={styles.subtitle}>Check-in</Text>
-						<Text style={styles.title}>{data.checIn || '04 Dec, 2024'}</Text>
+						<Text style={styles.title}>{data.checkInDate || '---'}</Text>
 					</View>
 					<View>
 						<Text style={styles.subtitle}>Check-out</Text>
-						<Text style={styles.title}>{data.checkOut || '15 Dec, 2024'}</Text>
+						<Text style={styles.title}>{data.checkOutDate || '---'}</Text>
 					</View>
 				</View>
 				<View style={{...styles.stayDesc}}>
 					<View style={styles.descBlock}>
 						<Text style={styles.subtitle}>Duration</Text>
-						<Text style={styles.title}>{data.hotel.package}</Text>
+						<Text style={styles.title}>{duration ? duration : '--'} days</Text>
 					</View>
 					<View style={styles.descBlock}>
-						<Text style={styles.subtitle}>Guests</Text>
-						<Text style={styles.title}>{'Adults '+ data.guests.adults + ' + Children' + data.guests.children}</Text>
+						<Text style={styles.subtitle}>Total Guests</Text>
+						<Text style={styles.title}>{'Adults '+ data.guests.adults + ' + Children ' + data.guests.children}</Text>
 					</View>
 				</View>
 				<View style={{...styles.stayDesc}}>
@@ -76,7 +81,7 @@ const styles = StyleSheet.create({
 	confirmContainer:{
 		margin: (20,10),
 		padding: 20,
-		backgroundColor: '#ddd',
+		backgroundColor: '#fff',
 		borderRadius:10
 	},
 	descBlock:{
@@ -86,7 +91,7 @@ const styles = StyleSheet.create({
 		color:'#888888',
 	},
 	title:{
-		fontSize:20,
+		fontSize:18,
 		color:'#111111'
 	},
 	stayDesc:{

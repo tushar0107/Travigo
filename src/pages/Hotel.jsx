@@ -8,7 +8,7 @@ export const Hotel = ({navigation})=>{
 
 	return(
 	<>
-		<Header title={'Hotel'} nextPage={'search'}/>
+		<Header title={'Hotel'} item={'search'}/>
 		<ScrollView>
 			{
 				hotels.map((hotel,key)=>{

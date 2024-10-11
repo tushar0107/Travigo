@@ -2,7 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 
 
-export const Header = ({title,search})=>{
+export const Header = ({title,item})=>{
 	const navigation = useNavigation();
 
 	return(
@@ -12,10 +12,15 @@ export const Header = ({title,search})=>{
           	</Pressable>
 			<Text style={styles.logo}>{title}</Text>
 			{
-				search ===true?
-				<Pressable android_ripple={{color:'#eee',borderless:true}} onPress={()=>{navigation.navigate('Filtering',{nextPage:'Hotel'})}} style={{width:50,height:50}}>
-			  		<Image source={require('../assets/search.png')} style={{width:30,margin:'auto',objectFit:'contain'}}/>
-				</Pressable>: <Text></Text>
+				item==='search'?
+				<Pressable android_ripple={{color:'#eee',borderless:true}} onPress={()=>{navigation.navigate('Filtering')}} style={{width:30,aspectRatio:1}}>
+			  		<Image source={require('../assets/search.png')} style={styles.headerIcon}/>
+				</Pressable>: 
+				item==='settings'?
+				<Pressable android_ripple={{color:'#eee',borderless:true}} onPress={()=>{navigation.navigate('Settings')}} style={{width:40,aspectRatio:1}}>
+			  		<Image source={require('../assets/settings.png')} style={styles.headerIcon}/>
+				</Pressable>
+				:<View style={{width:30}}></View>
 			}
 		</View>
 	);
@@ -37,5 +42,10 @@ const styles = StyleSheet.create({
 	applyBtn:{
 		fontSize: 18,
 		color:'#ff5757'
+	},
+	headerIcon:{
+		width:30,
+		margin:'auto',
+		objectFit:'contain'
 	}
 })
